@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('ecommerce_data.csv', encoding='ISO-8859-1')
+df = pd.read_csv("../ecommerce_data.csv", encoding='ISO-8859-1')
 
 print(df['Country'].value_counts())
 print(df['Description'].head(10))
