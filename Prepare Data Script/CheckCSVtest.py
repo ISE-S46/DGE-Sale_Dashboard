@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("../ecommerce_data.csv", encoding='ISO-8859-1')
+df = pd.read_csv("Prepare Data Script/ecommerce_data.csv", encoding='ISO-8859-1')
 
 print(df['Country'].value_counts())
 print(df['Description'].head(10))
@@ -20,3 +20,10 @@ plt.legend()
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+
+has_nan = df.isnull().values.any()
+print(f"Are there any NaN values? {has_nan}")
+
+nan_rows = df[df.isnull().any(axis=1)]
+print("Rows with NaN values:")
+print(nan_rows)
