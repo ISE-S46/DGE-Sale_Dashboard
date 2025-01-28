@@ -1,0 +1,18 @@
+CREATE TABLE sales (
+id INT AUTO_INCREMENT PRIMARY KEY,
+InvoiceNo VARCHAR(255),
+StockCode VARCHAR(255),
+Description TEXT,
+Quantity INT,
+InvoiceDate DATETIME,
+UnitPrice DECIMAL(10,2),
+CustomerID INT,
+Country VARCHAR(255),
+Revenue DECIMAL(10,2),
+user_id VARCHAR(36) -- Supabase UUID
+);
+
+CREATE TABLE users (
+id VARCHAR(36) PRIMARY KEY,
+email VARCHAR(255) UNIQUE NOT NULL
+);
