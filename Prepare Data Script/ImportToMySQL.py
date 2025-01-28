@@ -7,7 +7,7 @@ from pathlib import Path
 
 load_dotenv()
 
-env_path = Path(__file__).parent / ".env"
+env_path = Path(__file__).parent / "../.env"
 load_dotenv(dotenv_path=env_path)
 
 def import_csv_to_mysql():
