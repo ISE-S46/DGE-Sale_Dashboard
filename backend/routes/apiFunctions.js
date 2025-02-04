@@ -17,23 +17,32 @@ router.get('/revenue', (req, res) => {
     
     db.query(query, [req.user.id, latestDate, latestDate], (err, results) => {
       if (err) return res.status(500).json({ error: 'Database error' });
-      res.json(results[0]);
+      res.json(results);
     });
   });
 });
 
 router.get('/top-products', (req, res) => {
-  const query = `
-    SELECT Description, SUM(Revenue) AS total 
-    FROM sales 
-    WHERE user_id = ?
-    GROUP BY Description 
-    ORDER BY total DESC 
-    LIMIT 10
-  `;
-  db.query(query, [req.user.id], (err, results) => {
+  db.query('SELECT MAX(InvoiceDate) as latest_date FROM sales', (err, dateResults) => {
     if (err) return res.status(500).json({ error: 'Database error' });
-    res.json(results);
+    
+    const latestDate = dateResults[0].latest_date;
+    
+    const query = `
+      SELECT Description, SUM(Revenue) AS total 
+      FROM sales 
+      WHERE user_id = ?
+      AND MONTH(InvoiceDate) = MONTH(?) 
+      AND YEAR(InvoiceDate) = YEAR(?)
+      GROUP BY Description 
+      ORDER BY total DESC 
+      LIMIT 10
+    `;
+    
+    db.query(query, [req.user.id, latestDate, latestDate], (err, results) => {
+      if (err) return res.status(500).json({ error: 'Database error' });
+      res.json(results);
+    });
   });
 });
 
@@ -53,7 +62,7 @@ router.get('/total-orders', (req, res) => {
     
     db.query(query, [req.user.id, latestDate, latestDate], (err, results) => {
       if (err) return res.status(500).json({ error: 'Database error' });
-      res.json(results[0]);
+      res.json(results);
     });
   });
 });
@@ -79,7 +88,7 @@ router.get('/top-country', (req, res) => {
     
     db.query(query, [req.user.id, latestDate, latestDate], (err, results) => {
       if (err) return res.status(500).json({ error: 'Database error' });
-      res.json(results[0]);
+      res.json(results);
     });
   });
 });
