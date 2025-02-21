@@ -2,7 +2,7 @@ const express = require('express');
 
 module.exports = function createAuthRouter(supabase) {
   const router = express.Router();
-  
+
   // Login
   router.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -10,14 +10,14 @@ module.exports = function createAuthRouter(supabase) {
     if (error) return res.status(401).json({ error: error.message });
     res.json({ token: data.session.access_token });
   });
-  
+
   // Logout
   router.post('/logout', async (req, res) => {
     const { error } = await supabase.auth.signOut();
     if (error) return res.status(500).json({ error: error.message });
     res.json({ message: 'Logged out successfully' });
   });
-  
+
   // Authentication
   const authenticate = async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
@@ -27,6 +27,6 @@ module.exports = function createAuthRouter(supabase) {
     req.user = user;
     next();
   };
-  
+
   return { router, authenticate };
 };

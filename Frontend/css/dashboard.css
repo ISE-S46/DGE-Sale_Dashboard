@@ -1,0 +1,58 @@
+/* Dashboard layout */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link.active {
+    color: #025aa5;
+}
+
+/* Dashboard content */
+.card {
+    transition: transform .2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Dashboard cards */
+#total-revenue,
+#total-orders {
+    color: #025aa5;
+    font-weight: bold;
+}
+
+#top-product-name,
+#top-country-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-size: 1.1rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+}
